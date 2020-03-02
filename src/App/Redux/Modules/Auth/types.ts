@@ -1,6 +1,7 @@
 export type IAuthState = {
   readonly isLoading: boolean;
   readonly authenticatedId: string;
+  readonly token: string;
 };
 
 export type IAuth = {

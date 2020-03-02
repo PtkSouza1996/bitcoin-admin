@@ -1,11 +1,21 @@
 import { Store, applyMiddleware, createStore, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import rootModules, { IApplicationState } from './Modules';
+
+const persistConfig = {
+  key: 'bitcoin-admin',
+  storage,
+  whitelist: ['auth'],
+};
 
 const sagaMonitor =
   process.env.NODE_ENV === 'development'
     ? console.tron.createSagaMonitor()
     : null;
+
+const persistedReducer = persistReducer(persistConfig, rootModules.reducers);
 
 const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
 
@@ -15,10 +25,11 @@ const enhancer =
     : applyMiddleware(sagaMiddleware);
 
 const store: Store<IApplicationState> = createStore(
-  rootModules.reducers,
+  persistedReducer,
   enhancer as any
 );
 
 sagaMiddleware.run(rootModules.rootSaga);
+const persistor = persistStore(store);
 
-export default store;
+export { store, persistor };
