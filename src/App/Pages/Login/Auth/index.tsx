@@ -3,49 +3,69 @@ import { Typography, TextField, Button } from '@material-ui/core';
 import Form from 'App/Components/Form';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { PostAuth, IAuth } from 'App/Redux/Modules/Auth';
+import { IApplicationState } from 'App/Redux/Modules';
+import Loading from 'App/Components/Loading';
 import Context from '../Context';
 
-type IFormValues = {
-  username: string;
-  password: string;
-};
 function AuthForm() {
+  const isLoading = useSelector(
+    (state: IApplicationState) => state.auth.isLoading
+  );
   const { setShowRegister } = useContext(Context);
+  const dispatch = useDispatch();
 
-  const formik = useFormik<IFormValues>({
+  const {
+    handleChange,
+    handleBlur,
+    submitForm,
+    handleSubmit,
+    errors,
+    touched,
+  } = useFormik<IAuth>({
     initialValues: {
-      username: '',
+      email: '',
       password: '',
     },
     validationSchema: Yup.object().shape({
-      username: Yup.string()
+      email: Yup.string()
         .email()
         .required(),
       password: Yup.string().required(),
     }),
-    onSubmit: values => console.log(values),
+    onSubmit: values => {
+      dispatch(PostAuth(values));
+    },
   });
+
+  if (isLoading) return <Loading />;
+
   return (
-    <Form onSubmit={formik.handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <TextField
-        name="username"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+        name="email"
+        onChange={handleChange}
+        onBlur={handleBlur}
         variant="outlined"
-        label="Username"
-        error={!!formik.errors.username}
-        helperText={formik.errors.username}
+        label="email"
+        error={!!errors.email && touched.email}
       />
+      {errors.email && touched.email && (
+        <Typography color="error">{errors.email}</Typography>
+      )}
       <TextField
         name="password"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+        onChange={handleChange}
+        onBlur={handleBlur}
         variant="outlined"
         label="Password"
         type="password"
-        error={!!formik.errors.password}
-        helperText={formik.errors.password}
+        error={!!errors.password && touched.password}
       />
+      {errors.password && touched.password && (
+        <Typography color="error">{errors.password}</Typography>
+      )}
       <Typography align="center">
         Ainda não é cadastrado ?
         <Button color="primary" onClick={() => setShowRegister(true)}>
@@ -55,7 +75,8 @@ function AuthForm() {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => formik.submitForm()}
+        type="submit"
+        onClick={() => submitForm()}
       >
         Entrar
       </Button>
