@@ -6,6 +6,9 @@ const styles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    '& p': {
+      margin: '0px 15px',
+    },
     '& .MuiFormControl-root': {
       margin: '15px',
     },
