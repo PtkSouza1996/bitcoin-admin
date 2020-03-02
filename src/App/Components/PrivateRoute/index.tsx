@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { IApplicationState } from 'App/Redux/Modules';
@@ -8,7 +8,7 @@ type IProps<T> = {
   component: React.ComponentType<T>;
   path: string;
 };
-export default function PrivateRoute<T>(props: IProps<T>) {
+function PrivateRoute<T>(props: IProps<T>) {
   const userIsAuthenticate = useSelector(
     (state: IApplicationState) => !!state.auth.token
   );
@@ -34,3 +34,5 @@ export default function PrivateRoute<T>(props: IProps<T>) {
     />
   );
 }
+
+export default memo(PrivateRoute);

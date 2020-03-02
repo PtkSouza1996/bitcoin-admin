@@ -1,13 +1,14 @@
-import React, { PropsWithChildren } from 'react';
-import { AppBar, Toolbar, Grid } from '@material-ui/core';
+import React, { PropsWithChildren, memo } from 'react';
+import { AppBar, Toolbar } from '@material-ui/core';
 
-export default function Layout({ children }: PropsWithChildren<{}>) {
+function Layout({ children }: PropsWithChildren<{}>) {
   return (
     <>
       <AppBar position="static">
         <Toolbar />
       </AppBar>
-      <Grid>{children}</Grid>
+      <div style={{ margin: 30 }}>{children}</div>
     </>
   );
 }
+export default memo(Layout);

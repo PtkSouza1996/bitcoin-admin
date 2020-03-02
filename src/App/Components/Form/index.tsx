@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, memo } from 'react';
 import { makeStyles } from '@material-ui/core';
 
 const styles = makeStyles({
@@ -15,7 +15,7 @@ const styles = makeStyles({
   },
 });
 
-export default function Form({
+function Form({
   children,
   ...rest
 }: PropsWithChildren<JSX.IntrinsicElements['form']>) {
@@ -27,3 +27,4 @@ export default function Form({
     </form>
   );
 }
+export default memo(Form);
