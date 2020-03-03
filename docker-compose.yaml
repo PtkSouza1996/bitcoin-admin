@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  front:
+    container_name: admin_bitcoin
+    build: .
+    image: admin_bitcoin
+    ports:
+      - '8080:80'
+    container_name: admin_bitcoin
+    build:
+      context: .
+      dockerfile: dockerfile
