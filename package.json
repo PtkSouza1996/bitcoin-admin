@@ -6,7 +6,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "tdd": "react-app-rewired test",
-    "test": "npm tdd --watchAll=false",
+    "test": "react-app-rewired test --watchAll=false",
     "coverage": "react-scripts test --watchAll=false --coverage"
   },
   "dependencies": {
@@ -83,7 +83,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "SET CI=true npm test",
+      "pre-commit": "npm run test",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
