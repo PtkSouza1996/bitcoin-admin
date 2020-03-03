@@ -6,25 +6,14 @@ const api = axios.create({
 
 api.interceptors.response.use(
   response => {
-    console.log(response);
-
     return response.data;
   },
   error => {
-    console.log(error);
-
-    switch (error.response.status) {
-      case 401:
-        return Promise.reject(new Error('Não autorizado'));
-      case 400 || 422:
-        return Promise.reject(new Error('Dados inválidos'));
-      case 500:
-        return Promise.reject(
-          new Error('Erro no servidor, tente novamente mais tarde')
-        );
-      default:
-        return Promise.reject(error);
+    if (error.response) {
+      return Promise.reject(error.response.data);
     }
+
+    return Promise.reject(error);
   }
 );
 

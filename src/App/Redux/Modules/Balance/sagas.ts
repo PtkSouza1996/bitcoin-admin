@@ -6,7 +6,7 @@ import { BalanceActionTypes, IBalance } from './types';
 import { FetchBalanceSuccess } from '.';
 import { BalanceError } from './actions';
 
-function* fetchBalance() {
+export function* sagaFetchBalance(): Generator {
   try {
     const response = (yield call(api.get, '/account/balance')) as {
       balance: number;
@@ -26,5 +26,5 @@ function* fetchBalance() {
 }
 
 export default function* BalanceSaga() {
-  yield all([takeLatest(BalanceActionTypes.FETCH, fetchBalance)]);
+  yield all([takeLatest(BalanceActionTypes.FETCH, sagaFetchBalance)]);
 }
