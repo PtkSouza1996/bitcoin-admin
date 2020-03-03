@@ -11,6 +11,8 @@ api.interceptors.response.use(
     return response.data;
   },
   error => {
+    console.log(error);
+
     switch (error.response.status) {
       case 401:
         return Promise.reject(new Error('Não autorizado'));

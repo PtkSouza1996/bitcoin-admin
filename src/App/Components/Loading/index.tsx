@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Box, CircularProgress } from '@material-ui/core';
 
-export default function Loading() {
+function Loading() {
   return (
     <Box display="flex" justifyContent="center" alignItems="center" flex={1}>
       <CircularProgress />
     </Box>
   );
 }
+export default memo(Loading);
