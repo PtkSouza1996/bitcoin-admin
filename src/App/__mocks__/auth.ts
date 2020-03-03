@@ -8,3 +8,9 @@ export const successSigin = {
   token:
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlNWM1ZDE5OGIyMDkxMDI3YWI2ZDk1YiIsImlhdCI6MTU4MzE3OTI5NCwiZXhwIjoxNTgzMTc5ODk0fQ.CZhAilq8h9bzxe9j_RW5Ya2VuXoipMezCJ1kfwT_NaE',
 };
+
+export const errorSigin = {
+  statusCode: 401,
+  message: 'invalid password',
+  data: null,
+};

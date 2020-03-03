@@ -7,7 +7,7 @@ import { IReducerAction } from '..';
 import { IAuth, PostAuthSuccess, AuthError, AuthActionTypes } from '.';
 import { rehydrateToken, persistToken } from './services';
 
-function* postAuth(action: IReducerAction<IAuth>) {
+export function* sagaPostAuth(action: IReducerAction<IAuth>): Generator {
   try {
     const { token } = (yield call(api.post, '/login', action.payload)) as {
       token: string;
@@ -30,7 +30,7 @@ function* postAuth(action: IReducerAction<IAuth>) {
 
 export default function* AuthSaga() {
   yield all([
-    takeLatest(AuthActionTypes.SIGIN, postAuth),
+    takeLatest(AuthActionTypes.SIGIN, sagaPostAuth),
     takeLatest('persist/REHYDRATE', rehydrateToken),
   ]);
 }

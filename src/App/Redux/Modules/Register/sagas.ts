@@ -6,7 +6,7 @@ import { IReducerAction } from '..';
 import { PostRegisterSuccess } from '.';
 import { RegisterError } from './actions';
 
-function* postRegister(action: IReducerAction<IRegister>) {
+export function* sagaPostRegister(action: IReducerAction<IRegister>) {
   try {
     yield call(api.post, '/account', action.payload);
 
@@ -20,5 +20,5 @@ function* postRegister(action: IReducerAction<IRegister>) {
 }
 
 export default function* RegisterSaga() {
-  yield all([takeLatest(RegisterActionTypes.POST, postRegister)]);
+  yield all([takeLatest(RegisterActionTypes.POST, sagaPostRegister)]);
 }

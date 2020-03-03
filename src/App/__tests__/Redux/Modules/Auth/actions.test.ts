@@ -4,7 +4,7 @@ import {
   PostAuthSuccess,
   AuthError,
 } from 'App/Redux/Modules/Auth';
-import { userSigin, successSigin } from '../__mocks__';
+import { userSigin, successSigin } from 'App/__mocks__/auth';
 
 describe('Actions Auth', () => {
   it('should create an action to auth request', () => {

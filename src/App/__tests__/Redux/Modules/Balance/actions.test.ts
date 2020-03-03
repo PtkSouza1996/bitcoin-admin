@@ -1,7 +1,11 @@
 import formatCurrency from 'App/Utils/Currency';
-import { BalanceActionTypes } from '../types';
-import { FetchBalance, FetchBalanceSuccess, BalanceError } from '../actions';
-import balance from '../__mocks__';
+import {
+  BalanceActionTypes,
+  FetchBalance,
+  FetchBalanceSuccess,
+  BalanceError,
+} from 'App/Redux/Modules/Balance';
+import { balance } from 'App/__mocks__/balance';
 
 describe('Actions Balance', () => {
   it('should create an action to balance request', () => {

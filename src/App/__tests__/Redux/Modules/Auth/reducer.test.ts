@@ -1,7 +1,10 @@
-import authReducer from '../reducer';
-import { IAuthState, AuthActionTypes } from '../types';
-import { PostAuthSuccess } from '../actions';
-import { successSigin } from '../__mocks__';
+import {
+  IAuthState,
+  authReducer,
+  AuthActionTypes,
+  PostAuthSuccess,
+} from 'App/Redux/Modules/Auth';
+import { successSigin } from 'App/__mocks__/auth';
 
 describe('Reducer Auth', () => {
   let INITIAL_STATE = {} as IAuthState;

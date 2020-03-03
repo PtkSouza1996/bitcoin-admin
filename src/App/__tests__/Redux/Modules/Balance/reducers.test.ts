@@ -1,7 +1,10 @@
 import formatCurrency from 'App/Utils/Currency';
-import { IBalanceState, BalanceActionTypes } from '../types';
-import balanceReducer from '../reducer';
-import { FetchBalanceSuccess } from '../actions';
+import {
+  IBalanceState,
+  balanceReducer,
+  BalanceActionTypes,
+  FetchBalanceSuccess,
+} from 'App/Redux/Modules/Balance';
 
 describe('Reducer Balance', () => {
   let INITIAL_STATE = {} as IBalanceState;
